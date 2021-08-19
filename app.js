@@ -44,7 +44,7 @@ const app = express();
 //   callback(null, corsOptions); // callback expects two parameters: error and options
 // };
 
-// app.use();
+app.use(cors());
 
 app.use(logger("dev"));
 app.use(express.json({ limit: "50mb" }));
@@ -54,7 +54,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/courses", cors(), coursesRouter);
+app.use("/courses", coursesRouter);
 app.use("/media", verifyToken, can("admin", "student"), mediaRouter);
 app.use("/orderss", ordersRouter);
 app.use("/orders", verifyToken, can("admin", "student"), orderPaymentRouter);
